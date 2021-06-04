@@ -30,5 +30,44 @@ namespace OoAndInterface
             }
             return inventory;
         }
+
+        /*
+            Uten interface: 
+
+            private List<BuyOrSellEvent> _buyOrSellEvents;
+            private List<DepositOrWithdrawEvent> _depositOrWithdrawEvents;
+
+            public EventList()
+            {
+                _buyOrSellEvents = new List<BuyOrSellEvent>();
+                _depositOrWithdrawEvents = new List<DepositOrWithdrawEvent>();
+            }
+
+            public void Add(DepositOrWithdrawEvent myEvent)
+            {
+                _depositOrWithdrawEvents.Add(myEvent);
+            }
+
+            public void Add(BuyOrSellEvent buyOrSellEvent)
+            {
+                _buyOrSellEvents.Add(buyOrSellEvent);
+            }
+
+            public Inventory CreateInventory(DateTime date)
+            {
+                var inventory = new Inventory();
+                foreach (var buyOrSellEvent in _buyOrSellEvents.Where(e=>e.Date <= date))
+                {
+                    inventory.Process(buyOrSellEvent);
+                }
+                foreach (var depositOrWithdrawEvent in _depositOrWithdrawEvents.Where(e => e.Date <= date))
+                {
+                    inventory.Process(depositOrWithdrawEvent);
+                }
+
+                return inventory;
+            }
+         
+         */
     }
 }

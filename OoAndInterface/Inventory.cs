@@ -18,21 +18,38 @@ namespace OoAndInterface
 
         public void Process(IEvent myEvent)
         {
-            if (myEvent is BuyOrSellEvent)
+            if (myEvent is BuyOrSellEvent buyOrSellEvent)
             {
-                var buyOrSellEvent = (BuyOrSellEvent)myEvent;
                 var stock = buyOrSellEvent.Stock;
                 if (buyOrSellEvent.IsBuy && !Stocks.ContainsKey(stock)) Stocks.Add(stock, 0);
 
                 var factor = buyOrSellEvent.IsBuy ? 1 : -1;
                 Stocks[stock] += buyOrSellEvent.ShareCount * factor;
             }
-            else if (myEvent is DepositOrWithdrawEvent)
+            else if (myEvent is DepositOrWithdrawEvent depositOrWithdrawEvent)
             {
-                var depositOrWithdrawEvent = (DepositOrWithdrawEvent)myEvent;
                 var factor = depositOrWithdrawEvent.IsDeposit ? 1 : -1;
                 CashAmount += depositOrWithdrawEvent.Amount * factor;
             }
         }
+
+        /*
+            Uten interface:
+
+            public void Process(BuyOrSellEvent buyOrSellEvent)
+            {
+                var stock = buyOrSellEvent.Stock;
+                if (buyOrSellEvent.IsBuy && !Stocks.ContainsKey(stock)) Stocks.Add(stock, 0);
+
+                var factor = buyOrSellEvent.IsBuy ? 1 : -1;
+                Stocks[stock] += buyOrSellEvent.ShareCount * factor;
+            }
+
+            public void Process(DepositOrWithdrawEvent depositOrWithdrawEvent)
+            {
+                var factor = depositOrWithdrawEvent.IsDeposit ? 1 : -1;
+                CashAmount += depositOrWithdrawEvent.Amount * factor;
+            }
+         */
     }
 }
